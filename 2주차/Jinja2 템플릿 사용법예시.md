@@ -13,4 +13,5 @@ def main():
 
 <h3>Hello, {{ name }}!</h3>
 
+# {{ }} 는 Jinja2 템플릿의 적용 규칙 문법이다.
 # html 으로 전달해서 h3 name 에 전달된다.
