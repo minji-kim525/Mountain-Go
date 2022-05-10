@@ -4,6 +4,11 @@
 }
 
 
+.float-box.img-box{
+
+    border-color: black;
+}
+
 
 
 .img-thumbnail{
@@ -15,6 +20,7 @@ div>img{
     /*width:200px;*/
     /*margin: 70px;*/
     float: left;
+    padding: 23px;
 }
 
 .san_image{
@@ -27,27 +33,62 @@ div>img{
 .float-box{
 
     height: 400px;
-    background-color: green;
+    /*background-color: green;*/
     margin: 28px;
 
 }
 
 
-div>img{
 
-    padding: 23px;
+.mytitle {
+    color: red;
+    width: 300px;
+    height: 200px;
+    background-image: url('http://th2.tmon.kr/thumbs/image/af7/488/d5f/0ab94b913_700x700_95_FIT.jpg');
+    background-position: center;
+    background-size: cover;
+    border: 3px black dashed;
+    border-radius: 10px;
+    text-align: center;
+    padding-top: 40px;
+}
+
+.wrap {
+    background-position: center;
+    margin: 14px;
+    width: 300px;
+    /*background-color: blue;*/
+    float: left;
+}
+
+div>div>button{
+    /*margin-left: 100px;*/
+    /*margin-top:10px;*/
+    padding: 20px;
+
 }
 
 
+.wrap-2{
 
 
+    margin:20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    /*align-items: center;*/
 
-.background-wrap {
-  background-image: url('https://ww.namu.la/s/e64381c1ee1cf6e9faad329f2628451e2f1d0e4fddf58dfbd0f26395cc2277c21def121bc804aa5a786e542c02292ed03a1dd845ab374992d91e5e1b16220df08996ac33c1f96d644b2baa714856b95e9ccd6de07d33e5dcdaf949f06da162bc');
-  background-size: 272px 196px;
-  width: 272px;
-  height: 196px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
+}
+
+
+h3{
+    background-color: white;
+    width: 90px;
+    border:1px black solid;
+}
+
+.san_image{
+
+    /*border:px black solid;*/
 }
