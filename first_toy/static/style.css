@@ -1,0 +1,53 @@
+
+* {
+    font-family: 'Noto Serif KR', serif;
+}
+
+
+
+
+.img-thumbnail{
+
+    margin: 0px 0px 10px 0px;
+}
+
+div>img{
+    /*width:200px;*/
+    /*margin: 70px;*/
+    float: left;
+}
+
+.san_image{
+
+
+    width: 400px;
+    background-color: green;
+}
+
+.float-box{
+
+    height: 300px;
+    background-color: green;
+    margin: 40px;
+
+}
+
+
+div>img{
+
+    padding: 23px;
+}
+
+
+
+
+
+.background-wrap {
+  background-image: url('https://ww.namu.la/s/e64381c1ee1cf6e9faad329f2628451e2f1d0e4fddf58dfbd0f26395cc2277c21def121bc804aa5a786e542c02292ed03a1dd845ab374992d91e5e1b16220df08996ac33c1f96d644b2baa714856b95e9ccd6de07d33e5dcdaf949f06da162bc');
+  background-size: 272px 196px;
+  width: 272px;
+  height: 196px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
