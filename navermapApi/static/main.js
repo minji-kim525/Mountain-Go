@@ -53,7 +53,7 @@ $(document).ready(function () {         // 나는 id = map 으로 연결 시킨�
     function make_card(i, mountain) {
         let temp_html = `<div class="card" id="card-${i}">
             <div class="card-body">
-                <h5 class="card-title"><a href="javascript:click2center('${i}')" class="matjip-title">${mountain['name']}</a>⛰</h5>
+                <h5 class="card-title"><a href="#" class="matjip-title">${mountain['name']}</a>⛰</h5>
                 <p class="card-text">${mountain.address}</p>
             </div>
            </div>`;
@@ -98,17 +98,6 @@ $(document).ready(function () {         // 나는 id = map 으로 연결 시킨�
                 }, 2000); //2000은 2초
             }
         });
-    }
-
-    function click2center(i) {
-        let marker = markers[i]
-        let infowindow = infowindows[i]
-        if (infowindow.getMap()) {
-            infowindow.close();
-        } else {
-            infowindow.open(map, marker);
-            map.setCenter(infowindow.position)
-        }
     }
 })
 

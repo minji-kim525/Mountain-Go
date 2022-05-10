@@ -26,7 +26,7 @@ nav > h1 {
     margin-top: 30px;
 }
 
-.button-style {
+.button2-style {
     padding: 14px 32px;
     background-color: #1ed760;
     border-radius: 500px;
@@ -40,6 +40,10 @@ nav > h1 {
 }
 
 .button-style:hover {
+    transform: scale(1.07);
+}
+
+.button2-style:hover {
     transform: scale(1.07);
 }
 
@@ -83,4 +87,54 @@ nav > h1 {
 .iw-inner {
     padding: 10px;
     font-size: smaller;
+}
+
+.button-style{
+     padding: 14px 32px;
+    background-color: orange;
+    border-radius: 500px;
+    font-size: inherit;
+    color: black;
+    font-weight: 700;
+    border: none;
+    position: relative;
+    left: 100px;
+    margin-top: 20px;
+}
+
+.sub-title{
+    color: green;
+    margin-top: 20px;
+    font-size:40px;
+    position: relative;
+    right:380px;
+    margin-bottom: 20px;
+}
+
+img {
+    width:300px;
+    height: 200px;
+    margin-right: 20px;
+}
+
+.img-test{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-option{
+    margin-top: 10px;
+}
+
+.btn-option > button {
+    border-radius: 50px;
+    background-color: yellow;
+    padding:5px 10px 5px 10px;
+    margin-bottom: 30px;
+}
+
+.btn-option:hover {
+    transform: scale(1.07);
 }
