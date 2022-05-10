@@ -1,0 +1,57 @@
+ * {
+    font-family: 'Jua', sans-serif;
+
+}
+
+.wrap{
+    /*background-color: blue;*/
+    margin: auto;
+    background-position: center;
+    background-size: cover;
+    border-radius: 10px;
+    text-align: center;
+    /*padding-top: 40px;*/
+
+}
+
+
+
+
+.card-title{
+
+    /*background-color: green ;*/
+    /*margin: auto;*/
+}
+
+
+.power wrap{
+
+
+
+}
+.card-body{
+
+    /*background-color: green;*/
+    margin:auto;
+    background-position: center;
+    background-size: cover;
+    /*border: 3px black dashed;*/
+    border-radius: 7px;
+    text-align: center;
+    /*padding-top: 40px;*/
+}
+
+.card-text{
+
+    padding: 10px 20px 0px 20px;
+}
+
+.custom-file{
+
+
+}
+.card-title{
+
+    border-top: 3px black dashed;
+    padding-top: 30px;
+}

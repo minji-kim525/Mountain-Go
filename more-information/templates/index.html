@@ -1,0 +1,138 @@
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+
+    <link rel="stylesheet" type="text/css" href = "static/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <title>Mountain GO</title>
+    <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <script>
+        $(document).ready(function () {
+            bsCustomFileInput.init()
+            listing()
+        })
+
+        function listing() {
+            $.ajax({
+                type: "GET",
+                url: "/wp/diary/api/listing",
+                data: {},
+                success: function (response) {
+                    if (response["result"] == "success") {
+                        let articles = response['articles']
+                        for (let i = 0; i < articles.length; i++) {
+                            let title = articles[i]['title']
+                            let content = articles[i]['content']
+                            let file = articles[i]['filename']
+                            let time = articles[i]['time']
+
+                            let temp_html = `<div class="card">
+                                                <img src="../static/wp-wk1/${file}" class="card-img-top">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">${title}</h5>
+                                                    <p class="card-text">${content}</p>
+                                                    <p class="card-text"><small class="text-muted">${time}</small></p>
+                                                </div>
+                                            </div>`
+
+                            $('#cards-box').append(temp_html)
+                        }
+                    }
+                }
+            });
+        }
+
+        function update_profile() {
+            let title = $('#title').val()
+            let file = $('#file')[0].files[0]
+            let content = $("#content").val()
+            let form_data = new FormData()
+
+            form_data.append("file_give", file)
+            form_data.append("title_give", title)
+            form_data.append("content_give", content)
+
+            $.ajax({
+                type: "POST",
+                url: "/wp/diary/api/posting",
+                data: form_data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response["result"] == "success") {
+                        alert(response["msg"])
+                        window.location.reload()
+                    } else {
+                        alert(response["msg"])
+                    }
+                }
+            });
+        }
+    </script>
+
+</head>
+
+<body>
+
+
+    <div class="power wrap">
+
+
+        <div class="wrap" style="max-width: 600px;">
+
+            <div class="jumbotron jumbotron-fluid">
+                <div class="title">
+                    <h2 style="margin-bottom: 40px;">🔥한라산 정복 인증🔥</h2>
+                    <div class="posting-box">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="file">
+                            <label class="custom-file-label" for="file">사진 업로드하기</label>
+                        </div>
+                        <br><br>
+                        <button onclick="update_profile()" type="submit" class="btn btn-primary">인증하기</button>
+                        <br><br><br>
+                        <h5 class="card-title">한라산</h5>
+
+
+                        <p class="card-text">대한민국에서 가장 큰 섬인 제주도에 있으며 대한민국의 실효지배 영토 내의 최고봉이자 가장 높은 산(해발 1,947m). 대한민국의
+                            국립공원 중 하나이다. 국립공원 전역이 유네스코 세계유산으로 지정되었다. 그리고 대한민국의 실효지배 영토 내 해상 활화산이다. 이름을 풀이하면 운한(雲漢: 은하수,
+                            또는 높은 하늘)을 당긴다(拏)는 뜻으로 은하수를 붙잡을 정도로 높은 산이라는 뜻이다. 금강산, 지리산과 함께 대한민국 삼신산(三神山) 중 하나로 꼽힌다.
+
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+
+
+</div>
+</body>
+
+</html>
