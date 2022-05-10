@@ -1,0 +1,151 @@
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <title>국토종주</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <script>
+        $(document).ready(function () {
+            bsCustomFileInput.init()
+            listing()
+        })
+
+
+        function listing() {
+            $.ajax({
+                type: "GET",
+                url: "https://www.data.go.kr/catalog/15058682/openapi.json",
+                data: {},
+                success: function (response) {
+                    if (response["result"] == "success") {
+                        let rows = response['mountain']
+                        for (let i = 0; i < rows.length; i++) {
+                            let name = rows[i]['naeme']
+                            let description = rows[i]['description']
+                            let keywords = rows[i]['keywords']
+
+                            console.log(name, description, keywords)
+
+
+                            let temp_html = `<div class="card">
+                                                <img src="../static/wp-wk1/${file}" class="card-img-top">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">${title}</h5>
+
+                                                </div>
+                                            </div>`
+
+                            $('#cards-box').append(temp_html)
+                        }
+                    }
+                }
+            });
+        }
+
+        function update_profile() {
+            let title = $('#title').val()
+            let file = $('#file')[0].files[0]
+            let form_data = new FormData()
+
+            form_data.append("file_give", file)
+            form_data.append("title_give", title)
+
+
+            $.ajax({
+                type: "POST",
+                url: "/wp/diary/api/posting",
+                data: form_data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response["result"] == "success") {
+                        alert(response["msg"])
+                        window.location.reload()
+                    } else {
+                        alert(response["msg"])
+                    }
+                }
+            });
+        }
+    </script>
+    <style>
+        * {
+            font-family: 'Jua', sans-serif;
+        }
+
+        .posting-box {
+            margin-top: 20px;
+            width: 300px;
+        }
+
+        .posting-box > .custom-file {
+            margin-bottom: 20px;
+        }
+
+        .wrap {
+            max-width: 500px;
+            width: 100%;
+            margin:auto;
+        }
+
+        .title {
+            padding-left: 50px;
+        }
+    </style>
+</head>
+
+
+<body>
+<div class="wrap">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="title">
+            <h1>인증창</h1>
+            <div class="posting-box">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="file">
+                    <label class="custom-file-label" for="file">사진 선택하기</label>
+                </div>
+                <button onclick="update_profile()" type="submit" class="btn btn-primary">인증하기</button>
+            </div>
+        </div>
+    </div>
+    <div class="card mb-3" style="max-width: 900px;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="https://w.namu.la/s/28f2fc30d76bef67318682277bbc636428cec0821eed295e8737303667d1c1e10a5f4e2d36aa533edb882bdb157798f7a242ede039c4432b40681c708ddf7371f441fea074e38b71554fbd66eafd33289ab4194f639c8bb607f190a34f823d1200400c2e555b5eec08ad1c00112f9627" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">관악산</h5>
+                    <p class="card-text"> 서울특별시 관악구 신림동과 남현동, 경기도 안양시, 과천시의 경계에 있는 산. 높이는 632m. 1973년, 영등포구에서 관악구를 분구하면서 이 산에서 이름을 따왔다. 옛 과천군의 진산(鎭山)이다. 정상부에 국기봉 11곳이 있으며, 각 국기봉들은 능선과 고개로 연결되었다. 이 국기봉들을 종주하는 코스 또한 등산객들 사이에서 인기가 많다 .
+                    그리 높은 것은 아니지만 그래도 고도가 있는 만큼 정상부는 주변 낮은 지역의 3~4도 가량 기온이 낮다. 늦가을이나 초봄의 비가 꼭대기에서 눈이 되는 경우도 많고, 따뜻하다고 생각해도 위에는 덜 녹은 빙판이 있을 수 있으니 조심하는 것이 좋다. 관악구나 과천시같이 시내에서 바로 마주하는 곳에서 보면 확실히 눈도 일찍 쌓여서 오래 남고, 단풍도 위에서 시작해 아래로 내려온다는 것을 알 수 있다.</p>
+                    <p class="card-text"><small class="text-muted">인구 밀집지역 가운데에 위치한 산이라 주말에는 등산객이 매우 많기 때문에, 공식 등산로 이외에도 여러 등산로들이 개척되어 있다. 크게 서울시, 과천시, 안양시 방면에서 올라오는 등산로가 있다.</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+
+</html>

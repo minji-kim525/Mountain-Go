@@ -1,0 +1,163 @@
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <title>국토종주</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <script>
+        $(document).ready(function () {
+            bsCustomFileInput.init()
+            listing()
+        })
+
+        function listing() {
+            $.ajax({
+                type: "GET",
+                url: "/wp/diary/api/listing",
+                data: {},
+                success: function (response) {
+                    if (response["result"] == "success") {
+                        let articles = response['articles']
+                        for (let i = 0; i < articles.length; i++) {
+                            let title = articles[i]['title']
+                            let content = articles[i]['content']
+                            let file = articles[i]['filename']
+                            let time = articles[i]['time']
+
+                            let temp_html = `<div class="card">
+                                                <img src="../static/wp-wk1/${file}" class="card-img-top">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">${title}</h5>
+                                                    <p class="card-text">${content}</p>
+                                                    <p class="card-text"><small class="text-muted">${time}</small></p>
+                                                </div>
+                                            </div>`
+
+                            $('#cards-box').append(temp_html)
+                        }
+                    }
+                }
+            });
+        }
+
+        function update_profile() {
+            let title = $('#title').val()
+            let file = $('#file')[0].files[0]
+            let content = $("#content").val()
+            let form_data = new FormData()
+
+            form_data.append("file_give", file)
+            form_data.append("title_give", title)
+            form_data.append("content_give", content)
+
+            $.ajax({
+                type: "POST",
+                url: "/wp/diary/api/posting",
+                data: form_data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response["result"] == "success") {
+                        alert(response["msg"])
+                        window.location.reload()
+                    } else {
+                        alert(response["msg"])
+                    }
+                }
+            });
+        }
+    </script>
+    <style>
+        * {
+            font-family: 'Jua', sans-serif;
+        }
+
+        .posting-box {
+            margin-top: 20px;
+            width: 500px;
+        }
+
+        .posting-box > .custom-file {
+            margin-bottom: 20px;
+        }
+
+        .wrap {
+            max-width: 900px;
+            width: 100%;
+            margin:auto;
+        }
+
+        .title {
+            padding-left: 50px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="wrap">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="title">
+            <h1>인증창</h1>
+            <div class="posting-box">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="file">
+                    <label class="custom-file-label" for="file">사진 선택하기</label>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="title" placeholder="사진 제목">
+                </div>
+                <div class="form-group">
+                    <textarea placeholder="내용 입력" class="form-control" id="content" rows="3"></textarea>
+                </div>
+                <button onclick="update_profile()" type="submit" class="btn btn-primary">인증하기</button>
+            </div>
+        </div>
+    </div>
+    <div class="card mb-3" style="max-width: 900px;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="https://th.bing.com/th/id/OIP.G2RvKaVgptOWyWziUxO8rQHaFj?pid=ImgDet&rs=1" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">한라산</h5>
+                    <p class="card-text">대한민국에서 가장 큰 섬인 제주도에 있으며 대한민국의 실효지배 영토 내의 최고봉이자 가장 높은 산(해발 1,947m). 대한민국의 국립공원 중 하나이다. 국립공원 전역이 유네스코 세계유산으로 지정되었다. 그리고 대한민국의 실효지배 영토 내 해상 활화산이다. 이름을 풀이하면 운한(雲漢: 은하수, 또는 높은 하늘)을 당긴다(拏)는 뜻으로 은하수를 붙잡을 정도로 높은 산이라는 뜻이다. 금강산, 지리산과 함께 대한민국 삼신산(三神山) 중 하나로 꼽힌다.</p>
+                    <p class="card-text"><small class="text-muted">한라산은 험준한 한반도 내륙의 산과는 달리 완만한 경사로를 가지고 있다. 대표적으로 다음과 같은 5개의 등산로가 있다.
+
+어리목 탐방로 - 6.8km
+영실 탐방로 - 5.8km
+성널오름 탐방로 - 9.6km
+관음사 탐방로 - 8.7km
+돈내코 탐방로 - 7km
+성판악 탐방로 - 9.5km
+어리목 탐방로와 영실 탐방로는 백록담까지 올라가지 못하고, 윗세오름까지만 올라갈 수 있다. 돈내코 탐방로는 15년간 폐쇄되어 있다가 2009년 12월 개방하였는데, 남벽을 지나 윗세오름까지 연결되어 있다. 남벽분기점에서 백록담에 이를 수 있는 성널오름 코스까지는 1km 떨어져 있는데, 2009년 개방에서는 제외되었다.</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+
+</html>

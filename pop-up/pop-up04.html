@@ -1,0 +1,158 @@
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <title>국토종주</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <script>
+        $(document).ready(function () {
+            bsCustomFileInput.init()
+            listing()
+        })
+
+
+        function listing() {
+            $.ajax({
+                type: "GET",
+                url: "https://www.data.go.kr/catalog/15058682/openapi.json",
+                data: {},
+                success: function (response) {
+                    if (response["result"] == "success") {
+                        let rows = response['mountain']
+                        for (let i = 0; i < rows.length; i++) {
+                            let name = rows[i]['naeme']
+                            let description = rows[i]['description']
+                            let keywords = rows[i]['keywords']
+
+                            console.log(name, description, keywords)
+
+
+                            let temp_html = `<div class="card">
+                                                <img src="../static/wp-wk1/${file}" class="card-img-top">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">${title}</h5>
+
+                                                </div>
+                                            </div>`
+
+                            $('#cards-box').append(temp_html)
+                        }
+                    }
+                }
+            });
+        }
+
+        function update_profile() {
+            let title = $('#title').val()
+            let file = $('#file')[0].files[0]
+            let form_data = new FormData()
+
+            form_data.append("file_give", file)
+            form_data.append("title_give", title)
+
+
+            $.ajax({
+                type: "POST",
+                url: "/wp/diary/api/posting",
+                data: form_data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response["result"] == "success") {
+                        alert(response["msg"])
+                        window.location.reload()
+                    } else {
+                        alert(response["msg"])
+                    }
+                }
+            });
+        }
+    </script>
+    <style>
+        * {
+            font-family: 'Jua', sans-serif;
+        }
+
+        .posting-box {
+            margin-top: 20px;
+            width: 300px;
+        }
+
+        .posting-box > .custom-file {
+            margin-bottom: 20px;
+        }
+
+        .wrap {
+            max-width: 500px;
+            width: 100%;
+            margin:auto;
+        }
+
+        .title {
+            padding-left: 50px;
+        }
+    </style>
+</head>
+
+
+<body>
+<div class="wrap">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="title">
+            <h1>인증창</h1>
+            <div class="posting-box">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="file">
+                    <label class="custom-file-label" for="file">사진 선택하기</label>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="title" placeholder="사진 제목">
+                </div>
+                <div class="form-group">
+                    <textarea placeholder="내용 입력" class="form-control" id="content" rows="3"></textarea>
+                </div>
+                <button onclick="update_profile()" type="submit" class="btn btn-primary">인증하기</button>
+            </div>
+        </div>
+    </div>
+    <div class="card mb-3" style="max-width: 900px;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="https://w.namu.la/s/82387317d759a4d384484ffe4f98b91436e9fa8fe32249afe52082351a37a96497aeee7e6039c437f7acda80f8b1e0d807cf5c881ec9032dceaf942ed2f12432391a449659af6537a1cb4eadf289e153b44473600b2c9b664712aabc143c304bc9d620ac3bfa3d6d1a92257604a8cf65" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">금강산</h5>
+                    <p class="card-text">북한의 강원도에 있는 산. 한민족의 명산으로 유명하다. 대부분의 한국인에게는 한반도에서 가장 유명하고 아름다운 산 가운데 하나로 평가되며, 신라부터 일제강점기까지 많은 문학과 예술의 배경이자 인기 있는 관광지였다. 한때는 영어로 의역하여 '다이아몬드 마운틴(Diamond Mountain)'으로 알려지기도 했다.
+
+남북분단으로 북한령에 편입되면서 찾아가기 힘들어졌고 햇볕정책의 일환으로 1998년 말 - 2008년까지는 남한 사람들도 일부 구역을 관광할 수 있었지만, 2008년 금강산 관광객 피살 사건을 계기로 남북관계가 경색되자 중단되었다.</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+
+</html>

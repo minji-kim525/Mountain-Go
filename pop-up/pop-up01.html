@@ -1,0 +1,149 @@
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <title>국토종주</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <script>
+        $(document).ready(function () {
+            bsCustomFileInput.init()
+            listing()
+        })
+
+
+        function listing() {
+            $.ajax({
+                type: "GET",
+                url: "https://www.data.go.kr/catalog/15058682/openapi.json",
+                data: {},
+                success: function (response) {
+                    if (response["result"] == "success") {
+                        let rows = response['mountain']
+                        for (let i = 0; i < rows.length; i++) {
+                            let name = rows[i]['naeme']
+                            let description = rows[i]['description']
+                            let keywords = rows[i]['keywords']
+
+                            console.log(name, description, keywords)
+
+
+                            let temp_html = `<div class="card">
+                                                <img src="../static/wp-wk1/${file}" class="card-img-top">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">${title}</h5>
+
+                                                </div>
+                                            </div>`
+
+                            $('#cards-box').append(temp_html)
+                        }
+                    }
+                }
+            });
+        }
+
+        function update_profile() {
+            let title = $('#title').val()
+            let file = $('#file')[0].files[0]
+            let form_data = new FormData()
+
+            form_data.append("file_give", file)
+            form_data.append("title_give", title)
+
+
+            $.ajax({
+                type: "POST",
+                url: "/wp/diary/api/posting",
+                data: form_data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response["result"] == "success") {
+                        alert(response["msg"])
+                        window.location.reload()
+                    } else {
+                        alert(response["msg"])
+                    }
+                }
+            });
+        }
+    </script>
+    <style>
+        * {
+            font-family: 'Jua', sans-serif;
+        }
+
+        .posting-box {
+            margin-top: 20px;
+            width: 300px;
+        }
+
+        .posting-box > .custom-file {
+            margin-bottom: 20px;
+        }
+
+        .wrap {
+            max-width: 500px;
+            width: 100%;
+            margin:auto;
+        }
+
+        .title {
+            padding-left: 50px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="wrap">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="title">
+            <h1>인증창</h1>
+            <div class="posting-box">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="file">
+                    <label class="custom-file-label" for="file">사진 선택하기</label>
+                </div>
+
+                <button onclick="update_profile()" type="submit" class="btn btn-primary">인증하기</button>
+            </div>
+        </div>
+    </div>
+    <div class="card mb-3" style="max-width: 300px;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="https://w.namu.la/s/28c8d37a21f07c0a4b64c281d367edd6abe86024716ef391ab230d755caf0b14c1c871a93a975f5bb64cddfe3d60e564578cfe9ef3134e0c083694abbff74e5ec27dc39cde1bfa72fa0eefbd4b459ea1b7466edc82c86cf1118965d71e8b1d9e8160fa3fe0ae92d0f905e8276862c835" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">도봉산</h5>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+
+</html>

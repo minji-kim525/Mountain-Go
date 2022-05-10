@@ -1,0 +1,171 @@
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <title>국토종주</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <script>
+        $(document).ready(function () {
+            bsCustomFileInput.init()
+            listing()
+        })
+
+
+        function listing() {
+            $.ajax({
+                type: "GET",
+                url: "https://www.data.go.kr/catalog/15058682/openapi.json",
+                data: {},
+                success: function (response) {
+                    if (response["result"] == "success") {
+                        let rows = response['mountain']
+                        for (let i = 0; i < rows.length; i++) {
+                            let name = rows[i]['naeme']
+                            let description = rows[i]['description']
+                            let keywords = rows[i]['keywords']
+
+                            console.log(name, description, keywords)
+
+
+                            let temp_html = `<div class="card">
+                                                <img src="../static/wp-wk1/${file}" class="card-img-top">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">${title}</h5>
+
+                                                </div>
+                                            </div>`
+
+                            $('#cards-box').append(temp_html)
+                        }
+                    }
+                }
+            });
+        }
+
+        function update_profile() {
+            let title = $('#title').val()
+            let file = $('#file')[0].files[0]
+            let form_data = new FormData()
+
+            form_data.append("file_give", file)
+            form_data.append("title_give", title)
+
+
+            $.ajax({
+                type: "POST",
+                url: "/wp/diary/api/posting",
+                data: form_data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response["result"] == "success") {
+                        alert(response["msg"])
+                        window.location.reload()
+                    } else {
+                        alert(response["msg"])
+                    }
+                }
+            });
+        }
+    </script>
+    <style>
+        * {
+            font-family: 'Jua', sans-serif;
+        }
+
+        .posting-box {
+            margin-top: 20px;
+            width: 300px;
+        }
+
+        .posting-box > .custom-file {
+            margin-bottom: 20px;
+        }
+
+        .wrap {
+            max-width: 500px;
+            width: 100%;
+            margin:auto;
+        }
+
+        .title {
+            padding-left: 50px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="wrap">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="title">
+            <h1>인증창</h1>
+            <div class="posting-box">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="file">
+                    <label class="custom-file-label" for="file">사진 선택하기</label>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="title" placeholder="사진 제목">
+                </div>
+                <div class="form-group">
+                    <textarea placeholder="내용 입력" class="form-control" id="content" rows="3"></textarea>
+                </div>
+                <button onclick="update_profile()" type="submit" class="btn btn-primary">인증하기</button>
+            </div>
+        </div>
+    </div>
+    <div class="card mb-3" style="max-width: 900px;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="https://w.namu.la/s/d267b4c252d5c37859d8aafe125d269417f7a817219b56d17fbc33590f80d2a9de8c41b25753f2566a2bfd55a43172fdc281befd8210056a127b47ddf3062340a64a46ab9e7e06847d3a61bf6bcae8e59a7d838b07b8301052b612b2a9672f00d61e0acc6238525b88f4f5c4339089fd" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">설악산</h5>
+                    <p class="card-text">태백산맥에 있는 강원도의 명산. 속초시와 양양군·고성군·인제군에 걸쳐있다. 높이는 1,708m. 남한에서 한라산, 지리산 다음으로 세 번째로 높은 산이다.
+
+1970년 3월 24일 지정된 5번째 국립공원이다. 국립공원 총면적은 398.222km²이다.
+
+6.25 전쟁이 일어나기 전에는 북한에 속했지만, 휴전선이 그어지면서 대한민국이 수복한 지역. 지리산에서 백두산까지 이어지는 한반도의 거대한 산줄기인 백두대간의 척추 부분에 금강산과 약간 떨어진 채 있다. 하필이면 척추 부분에 아름다운 두 산이 있고 두 산의 중간쯤에 휴전선이 지난다. 한국전쟁 때 국군이 여기가 금강산인줄 알고 더 진격을 안했다는 농담도 있다. 그런데 금강산 문서를 보면 알겠지만 금강산과 설악산은 본래 같은 산인데 구분한 것이다.
+
+흔들바위와 울산바위가 유명하다. 그리고 흔들바위와 울산바위는 제주도와 해외로 수학여행지가 확장된 지금은 아니지만 예전 일부 남부 지방에 위치한 중ㆍ고등학교의 수학여행 단골 코스이기도 했다. 울산바위에서 동해 쪽을 바라보면 속초시 전경과 동해 바다가 보이는 게 장관이다.
+
+만우절마다 흔들바위가 떨어졌다는 농담글이 인터넷에 퍼지는 것으로도 유명하다. 참고로 이 흔들바위 낙하 농담은 최근에 퍼진 글이 아니라 2000년대 초반부터 돌았던 꽤 역사가 있는 농담이다.
+
+접근 도로망으로는 서울양양고속도로, 동해고속도로, 44번 국도(한계령), 46번 국도~56번 지방도(미시령), 462번 지방도(설악산로) 등이 있다. 44번 국도는 한계령이 설악산 국립공원 지역을 뚫고 지나가며, 462번 지방도는 속초에서 설악산 국립공원으로 들어갈 때 이용하는 도로이다.
+
+울산바위는 공포의 808칸 철계단으로 유명했으나 2012년 11월 30일자로 이 계단도 노후화와 위험을 이유로 역사속으로 사라지게 되었다. 그 이후 우회 등산로를 조성했다.
+
+현재 설악산엔 백담사와 신흥사가 위치해 있으며 이 중 신흥사는 문화재관람료라는 소위 입장료를 징수하고 있다. 백담사의 경우 2007년 폐지하였다. 설악산 코스 중 소공원으로 시작하는 코스를 가기 위해서는 입장료(1인당 3,500원)를 끊어야 된다. 오색, 남교리, 한계령, 장수대 등은 받지 않는다. 신흥사의 경우 설악산이 국립공원으로 지정되면서 설악산 국립공원의 대부분을 갖고 있던 신흥사 소유의 땅을 내놓았기 때문에 뭐라고 할 수도 없는 상황이다.
+
+산림청에서 선정한 대한민국 100대 명산에 이름을 올렸다.</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+
+</html>
