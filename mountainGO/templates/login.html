@@ -74,8 +74,8 @@
                 },
                 success: function (response) {
                     if (response['result'] == 'success') {
-                        $.cookie('mytoken', response['token'], {path: 'first.html'});
-                        window.location.replace("first.html")
+                        $.cookie('mytoken', response['token'], {path: '/first'});
+                        window.location.replace("/first")
                     } else {
                         alert(response['msg'])
                     }

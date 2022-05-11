@@ -63,7 +63,7 @@ def get_mountain():
 SECRET_KEY = 'SPARTA'
 
 
-@app.route('/first.html')
+@app.route('/first')
 def home():
     token_receive = request.cookies.get('mytoken')
     try:
