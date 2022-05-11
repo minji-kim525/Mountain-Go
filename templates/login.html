@@ -32,6 +32,17 @@
             $('#start_box').hide(500)
         }
 
+        function is_nickname(asValue) {
+            var regExp = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{2,10}$/;
+            return regExp.test(asValue);
+        }
+
+        function is_password(asValue) {
+            var regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z!@#$%^&*]{8,20}$/;
+            return regExp.test(asValue);
+        }
+
+
         // {% if msg %}
         //     alert("{{ msg }}")
         // {% endif %}
@@ -44,7 +55,6 @@
                 $("#input-username").focus()
                 return;
             } else {
-                a
                 $("#help-id-login").text("")
             }
 
@@ -80,10 +90,10 @@
             console.log(username, password, password2)
 
 
-            if ($("#help-id-login").hasClass("is-danger")) {
+            if ($("#help-id").hasClass("is-danger")) {
                 alert("아이디를 다시 확인해주세요.")
                 return;
-            } else if (!$("#help-id-login").hasClass("is-success")) {
+            } else if (!$("#help-id").hasClass("is-success")) {
                 alert("아이디 중복확인을 해주세요.")
                 return;
             }
@@ -132,16 +142,6 @@
             $("#help-id").toggleClass("is-hidden")
             $("#help-password").toggleClass("is-hidden")
             $("#help-password2").toggleClass("is-hidden")
-        }
-
-        function is_nickname(asValue) {
-            var regExp = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{2,10}$/;
-            return regExp.test(asValue);
-        }
-
-        function is_password(asValue) {
-            var regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z!@#$%^&*]{8,20}$/;
-            return regExp.test(asValue);
         }
 
         function check_dup() {
@@ -209,7 +209,7 @@
                             </div>
 
                         </div>
-                        <p id="help-id" class="help">아이디는 2-10자의 영문과 숫자와 일부 특수문자(._-)만 입력 가능합니다.</p>
+                        <p id="help-id" class="help is-hidden is-safe">아이디는 2-10자의 영문과 숫자와 일부 특수문자(._-)만 입력 가능합니다.</p>
                         <p id="help-id-login" class="help is-danger"></p>
 
                         <div class="field">
@@ -217,8 +217,9 @@
                                 <input id="input-password" class="input" type="password" placeholder="비밀번호">
                                 <span class="icon is-small is-left"><i class="fa fa-lock"></i></span>
                             </div>
-                            <p id="help-password" class="help is-hidden">영문과 숫자 조합의 8-20자의 비밀번호를 설정해주세요. 특수문자(!@#$%^&*)도
+                            <p id="help-password" class="help is-hidden is-safe">영문과 숫자 조합의 8-20자의 비밀번호를 설정해주세요. 특수문자(!@#$%^&*)도
                                 사용 가능합니다.</p>
+                            <p id="help-password-login" class="help is-danger"></p>
                         </div>
 
 
@@ -248,7 +249,7 @@
                                            placeholder="비밀번호 재입력">
                                     <span class="icon is-small is-left"><i class="fa fa-lock"></i></span>
                                 </div>
-                                <p id="help-password2" class="help is-hidden">비밀번호를 다시 한 번 입력해주세요.</p>
+                                <p id="help-password2" class="help is-hidden is-safe">비밀번호를 다시 한 번 입력해주세요.</p>
 
                             </div>
                         </div>

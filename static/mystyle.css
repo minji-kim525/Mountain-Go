@@ -50,6 +50,8 @@ body {
 .container{
     display:none;
 }
+
+
 .button.is-sparta {
     font-weight: 500;
     background-color: #aaaaaa;
