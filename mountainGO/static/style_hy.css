@@ -1,0 +1,98 @@
+
+* {
+    font-family: 'Noto Serif KR', serif;
+}
+
+
+.float-box.img-box{
+
+    border-color: black;
+}
+
+
+
+.img-thumbnail{
+
+    margin: 0px 0px 10px 0px;
+}
+
+div>img{
+    /*width:200px;*/
+    /*margin: 70px;*/
+    float: left;
+    padding: 23px;
+}
+
+.san_image{
+
+
+    width: 400px;
+    background-color: green;
+}
+
+.float-box{
+
+    height: 400px;
+    /*background-color: green;*/
+    margin: 20px;
+
+
+
+}
+
+
+
+.mytitle {
+    color: red;
+    width: 300px;
+    height: 200px;
+    background-image: url('http://th2.tmon.kr/thumbs/image/af7/488/d5f/0ab94b913_700x700_95_FIT.jpg');
+    background-position: center;
+    background-size: cover;
+    border: 3px black dashed;
+    border-radius: 10px;
+    text-align: center;
+    padding-top: 40px;
+
+
+}
+
+.wrap {
+    background-position: center;
+    margin: 14px;
+    width: 300px;
+    /*background-color: blue;*/
+    float: left;
+}
+
+div>div>button{
+    /*margin-left: 100px;*/
+    /*margin-top:10px;*/
+    padding: 20px;
+
+}
+
+
+.wrap-2{
+
+
+    margin:20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    /*align-items: center;*/
+
+
+}
+
+
+h3{
+    background-color: white;
+    width: 90px;
+    border:1px black solid;
+}
+
+.san_image{
+
+    /*border:px black solid;*/
+}
