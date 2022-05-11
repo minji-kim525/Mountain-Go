@@ -13,8 +13,24 @@ def main():
     return render_template("index.html")
 
 @app.route('/HanLa')
-def index2():
+def HanLa():
     return render_template("HanLa.html")
+
+@app.route('/Seorak')
+def Seorak():
+    return render_template("Seorak.html")
+
+@app.route('/Gwanag')
+def Gwanag():
+    return render_template("Gwanag.html")
+
+@app.route('/Dubong')
+def Dubong():
+    return render_template("Dubong.html")
+
+@app.route('/GiRi')
+def GiRi():
+    return render_template("GiRi.html")
 
 @app.route('/mountain', methods=["GET"])
 def get_mountain():
