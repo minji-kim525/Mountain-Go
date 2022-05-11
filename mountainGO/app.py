@@ -45,7 +45,7 @@ def GiRi():
 
 
 @app.route('/mypage')
-def GiRi():
+def mypage():
     return render_template("mypage.html")
 
 
