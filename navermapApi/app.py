@@ -12,6 +12,10 @@ db = client.dbsparta
 def main():
     return render_template("index.html")
 
+@app.route('/HanLa')
+def index2():
+    return render_template("HanLa.html")
+
 @app.route('/mountain', methods=["GET"])
 def get_mountain():
     # 1. 데이터베이스에서 맛집 목록을 꺼내와야 한다.
