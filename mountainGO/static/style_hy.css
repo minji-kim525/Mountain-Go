@@ -1,6 +1,5 @@
-
 * {
-    font-family: 'Noto Serif KR', serif;
+    font-family: 'Jua', sans-serif;
 }
 
 
@@ -53,8 +52,6 @@ div>img{
     border-radius: 10px;
     text-align: center;
     padding-top: 40px;
-
-
 }
 
 .wrap {
@@ -92,7 +89,4 @@ h3{
     border:1px black solid;
 }
 
-.san_image{
 
-    /*border:px black solid;*/
-}

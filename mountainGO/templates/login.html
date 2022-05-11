@@ -10,15 +10,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 
-    <link href="{{ url_for('static', filename='mystyle.css') }}" rel="stylesheet">
 
     <!-- Bulma CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
     <!-- Font Awesome CSS -->
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <link href="{{ url_for('static', filename='mystyle.css') }}" rel="stylesheet">
 
-    <link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@300;700;800;900&family=Josefin+Sans&display=swap"
-          rel="stylesheet">
 
     <!-- JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -184,13 +183,13 @@
 
 <section class="hero is-white">
     <div class="hero-body has-text-centered" style="padding-bottom:1rem;margin:auto;">
-        <h1 class="title">MOUNTAIN GO</h1>
+        <h1 style="color:green;" class="title">MOUNTAIN GO</h1>
         <h3 class="subtitle">정상을 향해</h3>
     </div>
 </section>
 
 <div class="start_wrap">
-    <button class="start" id="start_box" onclick="open_box()" class="button is-rounded">click me</button>
+    <button class="start" id="start_box" onclick="open_box()" class="button is-rounded"><b>click me</b></button>
 </div>
 
 <section class="section">

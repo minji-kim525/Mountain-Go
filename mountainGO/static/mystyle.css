@@ -1,5 +1,5 @@
 *{
-    font-family: 'Hahmlet', serif;
+    font-family: 'Jua', sans-serif;
     font-weight: 300;
 }
 
@@ -17,10 +17,11 @@ body {
 }
 
 .title {
+    color: green;
     font-weight: 900;
     font-size: 5rem;
-
 }
+
 
 .subtitle {
     font-size: 2rem;
