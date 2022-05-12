@@ -6,6 +6,15 @@ import hashlib
 from flask import Flask, render_template, jsonify, request, redirect, url_for
 from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
+from connection import s3_connection
+from config import BUCKET_NAME
+import boto3
+from botocore.client import Config
+
+
+
+
+
 
 
 app = Flask(__name__)
@@ -77,11 +86,6 @@ def home():
         return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
 
-
-
-
-
-
 @app.route('/login')
 def login():
     msg = request.args.get("msg")
@@ -134,6 +138,23 @@ def check_dup():
     return jsonify({'result': 'success', 'exists': exists})
 
 
+@app.route('/HanLa', methods=['POST'])
+def hanLa_post():
+    s3 = s3_connection()
+    data = request.form['image-0']
+
+
+    s3 = boto3.resource(
+        's3',
+        aws_access_key_id='AKIAWBXANJBJK75PIVV3',
+        aws_secret_access_key='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',
+        config=Config(signature_version='s3v4')
+    )
+    s3.Bucket('mountaingo').put_object(
+
+        Key=f'images/{data}', Body=data, ContentType='image/jpeg')
+
+    return jsonify({'msg': 'success!!'})
 
 
 if __name__ == '__main__':

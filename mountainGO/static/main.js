@@ -106,3 +106,36 @@ function click2center(i) {
 function to_first() {
     window.location.href = "/first"
 }
+
+
+
+function receive_img() {
+
+    let image_shot = $('#inputGroupFile04').val()
+
+    $.ajax({
+        type: "POST",
+        url: `/HanLa`,
+        data : {'image-0':image_shot},
+         success: function (response) {
+            alert(response['msg'])
+            window.location.reload()
+        }
+    });
+}
+//
+// function save_comment(){
+//
+//     let name = $('#name').val()
+//     let comment = $('#comment').val()
+//
+//     $.ajax({
+//         type: 'POST',
+//         url: '/toy',
+//         data: {'name_give':name,'comment_give':comment},
+//         success: function (response) {
+//             alert(response['msg'])
+//             window.location.reload()
+//         }
+//     });
+// }
