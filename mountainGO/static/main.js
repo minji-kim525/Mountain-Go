@@ -17,6 +17,10 @@ $(document).ready(function () {
     get_mountains()
 })
 
+setTimeout(function () {
+    window.dispatchEvent(new Event('resize'));
+}, 600);
+
 function get_mountains() {
     $('#mountain-box').empty();
     markers = []
