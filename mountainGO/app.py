@@ -54,7 +54,7 @@ def mypage():
 
 @app.route('/mountain', methods=["GET"])
 def get_mountain():
-    # 1. 데이터베이스에서 맛집 목록을 꺼내와야 한다.
+    # 1. 데이터베이스에서 산 목록을 꺼내와야 한다.
     mountain_list = list(db.mountains.find({}, {'_id': False}))
     # 2. 클라이언트에 돌려준다.
     return jsonify({'result': 'success', 'mountain_list': mountain_list})
