@@ -97,3 +97,8 @@ function click2center(i) {
         map.setCenter(infowindow.position)
     }
 }
+
+
+function to_first() {
+    window.location.href = "/first"
+}
