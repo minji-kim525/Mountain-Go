@@ -4,7 +4,7 @@
 ### Preview
 
 
-<p align= "center"> <img width="400" height="250" alt="스크린샷 2022-05-12 오후 8 14 07" src="https://user-images.githubusercontent.com/85288036/168061679-4740e17e-004b-4f97-92ab-cace2eb6fcb1.png"> </p>
+<p align= "center"> <img width="600" height="250" alt="스크린샷 2022-05-12 오후 8 14 07" src="https://user-images.githubusercontent.com/85288036/168061679-4740e17e-004b-4f97-92ab-cace2eb6fcb1.png"> </p>
 
 
 <p align= "center"><img width="400" height="250" src="https://user-images.githubusercontent.com/85288036/168066827-d26a3098-c098-4005-b7f1-7149702e2b73.png"></p>
