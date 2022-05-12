@@ -1,5 +1,11 @@
 # Team Project-MountainGO
 
+
+
+### Preview
+
+
+
 <img width="1408" alt="스크린샷 2022-05-12 오후 8 14 07" src="https://user-images.githubusercontent.com/85288036/168061679-4740e17e-004b-4f97-92ab-cace2eb6fcb1.png">
 
 #### 내용
@@ -18,14 +24,10 @@
 김하연 (팀장)   
 정인성     
 김민지
+
+### Note
   
-    
-******
-## 1. Preview
-
-
-## 2. Note
-- Tags
+  - Tags
   -  S.A(https://summerlaftel07.tistory.com/34)
 - Dependencies
   - flask
@@ -33,4 +35,7 @@
   - PyJWT
   - dnspython
   - Jinja2
-   
+
+
+
+
